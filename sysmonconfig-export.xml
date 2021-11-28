@@ -1591,6 +1591,9 @@
 			<SourceImage condition="is">C:\Windows\System32\rdpclip.exe</SourceImage>
 			<SourceImage condition="is">C:\Windows\sysmon64.exe</SourceImage>
 			<SourceImage condition="is">C:\Windows\sysmon.exe</SourceImage>
+			<SourceImage condition="begin with">"C:\Program Files\DesktopCentral_Server"</SourceImage>
+			<SourceImage condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</SourceImage>
+			<SourceImage condition="is">"C:\Windows\System32\dwm.exe"</SourceImage>
 		</CreateRemoteThread>
 
 	<!--SYSMON EVENT ID 9 : RAW DISK ACCESS [RawAccessRead]-->
