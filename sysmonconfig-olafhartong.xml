@@ -602,7 +602,7 @@
         <IntegrityLevel condition="is">AppContainer</IntegrityLevel>
         <ParentCommandLine condition="begin with">%%SystemRoot%%\system32\csrss.exe ObjectDirectory=\Windows</ParentCommandLine>
         <ParentImage condition="is">C:\Windows\system32\SearchIndexer.exe</ParentImage>
-        !--SECTION: DesktopCentral-->
+        <!--SECTION: DesktopCentral-->
 			<CommandLine condition="begin with">"C:\Program Files\DesktopCentral_Server"</CommandLine>
 			<CommandLine condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</CommandLine>
 			<Image condition="begin with">"C:\Program Files\DesktopCentral_Server"</Image>
