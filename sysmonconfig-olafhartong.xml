@@ -1084,6 +1084,7 @@
         </Rule>
         <TargetImage condition="end with">Google\Chrome\Application\chrome.exe</TargetImage>
         <SourceImage condition="is">C:\Windows\System32\wbem\WmiPrvSE.exe</SourceImage>
+	 <SourceImage condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</SourceImage>
       </CreateRemoteThread>
     </RuleGroup>
     <!-- Event ID 9 == RawAccessRead - Includes -->
