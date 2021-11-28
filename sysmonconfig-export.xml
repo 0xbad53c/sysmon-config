@@ -13,7 +13,7 @@
   REQUIRED: Sysmon version 8.00 or higher, it's recommended you stay updated.
 -->
 
-<Sysmon schemaversion="4.10">
+<Sysmon schemaversion="4.50">
 	<!--SYSMON META CONFIG-->
 	<HashAlgorithms>md5,imphash,sha256</HashAlgorithms> <!-- Both MD5 and SHA256 are the industry-standard algorithms for identifying files -->
 	<CheckRevocation/> <!-- Check loaded drivers, log if their code-signing certificate has been revoked, in case malware stole one to sign a kernel driver -->
@@ -201,6 +201,7 @@
 			<CommandLine name="MitreRef=T0000,Technique=Remote Desktop Shadow,Alert=Hacking/Remote Admin,Alert=Remote Desktop Shadow Alert" condition="contains">/shadow</CommandLine>
 			<CommandLine name="MitreRef=T0000,Technique=Remote Desktop Shadow,Alert=Hacking/Remote Admin,Alert=Remote Desktop Shadow with no Consent alert" condition="contains">/noConsentPrompt</CommandLine>
 			<!--MITRE TECHNIQUE: Obfuscation-->
+			<!-- covered in Wazuh via powershell script block logging
 			<CommandLine name="MitreRef=T1001,Technique=Data Obfuscation,Tactic=Command And Control,Alert=Hacking" condition="contains">FromBase64String</CommandLine>
 			<CommandLine name="MitreRef=T1086,Technique=PowerShell,Tactic=Execution,Alert=Detect Secure Strings,Alert=Powershell Secure String creation" condition="contains">convertto-securestring</CommandLine>
 			<CommandLine name="MitreRef=T1086,Technique=PowerShell,Tactic=Execution,Alert=Detect some more obfuscation,Alert=Powershell Obfuscation with VerbosePreference" condition="contains">VerbosePreference.ToString</CommandLine>
@@ -230,6 +231,7 @@
 			<CommandLine name="MitreRef=T1001,Technique=Data Obfuscation,Tactic=Command And Control" condition="contains">-en</CommandLine>
 			<CommandLine name="MitreRef=T1001,Technique=Data Obfuscation,Tactic=Command And Control,Alert=Hacking" condition="contains">^c^o^m^S^p^E^c^</CommandLine>
 			<CommandLine name="MitreRef=T1001,Technique=Data Obfuscation,Tactic=Command And Control,Alert=Hacking" condition="contains">C^om^S^pEc</CommandLine>
+-->
 			<!--Native Windows tools - Living off the land-->
 			<Image name="MitreRef=ToDo,Technique=,Alert=Process/Session/User Query with query.exe" condition="image">query.exe</Image> <!--Microsoft:Windows: shows information about processes -->
 			<Image name="MitreRef=CAPEC-293,Technique=Traceroute Route Enumeration,Alert=Traceroute Enumeration,MitreURL= https://capec.mitre.org/data/definitions/293.html" condition="image">tracert.exe</Image> <!--Microsoft:Windows: shows routing information -->
@@ -353,6 +355,7 @@
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">shareenum</CommandLine>
 			<CommandLine name="MitreRef=T1003,Technique=Credential Dumping,Tactic=Credential Access,Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">sekurlsa</CommandLine>
 			<CommandLine name="MitreRef=T1003,Technique=Credential Dumping,Tactic=Credential Access,Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">reg SAVE</CommandLine>
+			<!--
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-DllInjection</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-Shellcode</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-WmiCommand</CommandLine>
@@ -456,7 +459,7 @@
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-ReverseDNSLookup</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">smbscanner</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-FruityC2</CommandLine>
-			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-Stager</CommandLine>
+			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">Invoke-Stager</CommandLine>-->
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">process call create</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">call set priority</CommandLine>
 			<CommandLine name="Alert=Hacking Command Line events,Tactic=Privilege Escalation" condition="contains">call terminate</CommandLine>
@@ -909,6 +912,21 @@
 			<ParentImage condition="is">C:\Program Files (x86)\MaaS360\Cloud Extender\EMSAgent.exe</ParentImage>
 			<ParentImage condition="is">C:\Program Files\Octopus Deploy\Tentacle\Tentacle.exe</ParentImage>
 			<CommandLine condition="contains">chrome.nativeMessaging.out</CommandLine>
+			
+			<!--SECTION: DesktopCentral-->
+			<CommandLine condition="begin with">"C:\Program Files\DesktopCentral_Server"</CommandLine>
+			<CommandLine condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</CommandLine>
+			<Image condition="begin with">"C:\Program Files\DesktopCentral_Server"</Image>
+			<Image condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</Image>
+			<ParentImage condition="begin with">"C:\Program Files\DesktopCentral_Server"</ParentImage>
+			<ParentImage condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</ParentImage>
+			
+			<CommandLine condition="begin with">"C:\Program Files\Windows Defender"</CommandLine>
+			<CommandLine condition="begin with">"C:\Program Files (x86)\ossec-agent"</CommandLine>
+			<Image condition="begin with">"C:\Program Files\Windows Defender"</Image>
+			<Image condition="begin with">"C:\Program Files (x86)\ossec-agent"</Image>
+			<ParentImage condition="begin with">"C:\Program Files\Windows Defender"</ParentImage>
+			<ParentImage condition="begin with">"C:\Program Files (x86)\ossec-agent"</ParentImage>
 		</ProcessCreate>
 
 	<!--SYSMON EVENT ID 2 : FILE CREATION TIME RETROACTIVELY CHANGED IN THE FILESYSTEM [FileCreateTime]-->
@@ -917,18 +935,21 @@
 		<!--DATA: RuleName, UtcTime, ProcessGuid, ProcessId, Image, TargetFilename, CreationUtcTime, PreviousCreationUtcTime-->
 		<FileCreateTime onmatch="include">
 			<Image name="MitreRef=T1099,Technique=Timestomp,Tactic=Defense Evasion,Alert=Timestomp/File creation time retroactively changed!" condition="begin with">C:\Users</Image> <!--Look for timestomping in user area-->
-			<Image name="MitreRef=T1099,Technique=Timestomp,Tactic=Defense Evasion,Alert=Timestomp/File creation time retroactively changed!" condition="begin with">C:\ProgramData</Image> <!--Look for timestomping in user area-->
-			<Image name="MitreRef=T1099,Technique=Timestomp,Tactic=Defense Evasion,Alert=Timestomp/File creation time retroactively changed!" condition="contains">\Temp\</Image> <!--Mitre T1099--><!--Look for timestomping in temp folders-->
+			<TargetFilename name="MitreRef=T1099,Technique=Timestomp,Tactic=Defense Evasion,Alert=Timestomp/File creation time retroactively changed!" condition="end with">.exe</TargetFilename> <!--Look for backdated executables anywhere-->
+			<Image name="MitreRef=T1099,Technique=Timestomp,Tactic=Defense Evasion,Alert=Timestomp/File creation time retroactively changed!" condition="begin with">\Device\HarddiskVolumeShadowCopy</Image> <!--Nothing should be written here | Credit: @SBousseaden [ https://twitter.com/SBousseaden/status/1133030955407630336 ] -->
 		</FileCreateTime>
 
 		<FileCreateTime onmatch="exclude">
-			<Image condition="image">C:\Windows\system32\backgroundTaskHost.exe</Image>
 			<Image condition="is">TrustedInstaller.exe</Image> <!--Ignore setups-->
 			<Image condition="image">OneDrive.exe</Image> <!--OneDrive constantly changes file times-->
 			<Image condition="image">vivaldi.exe</Image> <!--Vivaldi constantly changes file times-->
 			<Image condition="image">chrome.exe</Image> <!--Chrome constantly changes file times-->
 			<Image condition="image">C:\WINDOWS\system32\backgroundTaskHost.exe</Image> <!--Chrome constantly changes file times-->
 			<Image condition="contains">setup</Image> <!--Ignore setups-->
+			<Image condition="contains">Update\</Image> <!--Ignore setups-->
+			<Image condition="end with">redist.exe</Image> <!--Ignore setups-->
+			<Image condition="is">msiexec.exe</Image> <!--Ignore setups-->
+			<TargetFilename condition="contains">\NVIDIA\NvBackend\ApplicationOntology\</TargetFilename> <!--NVIDIA GeForce Experience Application Ontology, 1000's of events in user profile-->
 		</FileCreateTime>
 
 	<!--SYSMON EVENT ID 3 : NETWORK CONNECTION INITIATED [NetworkConnect]-->
