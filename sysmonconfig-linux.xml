@@ -128,9 +128,9 @@ NG FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
           <Image condition="end with">setregid</Image>
         </Rule>
         <Rule name="process creation from uncommon directories" groupRelation="or">
-          <Image condition="start with">/home</Image>
-          <Image condition="start with">/root</Image>
-          <Image condition="start with">/tmp</Image>
+          <Image condition="begin with">/home</Image>
+          <Image condition="begin with">/root</Image>
+          <Image condition="begin with">/tmp</Image>
         </Rule>
         <Rule name="Discovery" groupRelation="or">
           <Image condition="end with">/bin/whoami</Image>
