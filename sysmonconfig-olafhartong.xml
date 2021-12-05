@@ -603,19 +603,19 @@
         <ParentCommandLine condition="begin with">%%SystemRoot%%\system32\csrss.exe ObjectDirectory=\Windows</ParentCommandLine>
         <ParentImage condition="is">C:\Windows\system32\SearchIndexer.exe</ParentImage>
         <!--SECTION: DesktopCentral-->
-			<CommandLine condition="begin with">"C:\Program Files\DesktopCentral_Server"</CommandLine>
-			<CommandLine condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</CommandLine>
-			<Image condition="begin with">"C:\Program Files\DesktopCentral_Server"</Image>
-			<Image condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</Image>
-			<ParentImage condition="begin with">"C:\Program Files\DesktopCentral_Server"</ParentImage>
-			<ParentImage condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</ParentImage>
-			
-			<CommandLine condition="begin with">"C:\Program Files\Windows Defender"</CommandLine>
-			<CommandLine condition="begin with">"C:\Program Files (x86)\ossec-agent"</CommandLine>
-			<Image condition="begin with">"C:\Program Files\Windows Defender"</Image>
-			<Image condition="begin with">"C:\Program Files (x86)\ossec-agent"</Image>
-			<ParentImage condition="begin with">"C:\Program Files\Windows Defender"</ParentImage>
-			<ParentImage condition="begin with">"C:\Program Files (x86)\ossec-agent"</ParentImage>
+	<CommandLine condition="begin with">C:\Program Files\DesktopCentral_Server</CommandLine>
+	<CommandLine condition="begin with">C:\Program Files (x86)\DesktopCentral_Agent</CommandLine>
+	<Image condition="begin with">C:\Program Files\DesktopCentral_Server</Image>
+	<Image condition="begin with">C:\Program Files (x86)\DesktopCentral_Agent</Image>
+	<ParentImage condition="begin with">C:\Program Files\DesktopCentral_Server</ParentImage>
+	<ParentImage condition="begin with">C:\Program Files (x86)\DesktopCentral_Agent</ParentImage>
+
+	<CommandLine condition="begin with">C:\Program Files\Windows Defender</CommandLine>
+	<CommandLine condition="begin with">C:\Program Files (x86)\ossec-agent</CommandLine>
+	<Image condition="begin with">C:\Program Files\Windows Defender</Image>
+	<Image condition="begin with">C:\Program Files (x86)\ossec-agent</Image>
+	<ParentImage condition="begin with">C:\Program Files\Windows Defender</ParentImage>
+	<ParentImage condition="begin with">C:\Program Files (x86)\ossec-agent</ParentImage>
       </ProcessCreate>
     </RuleGroup>
     <!-- Event ID 2 == File Creation Time - Includes -->
@@ -1084,8 +1084,8 @@
         </Rule>
         <TargetImage condition="end with">Google\Chrome\Application\chrome.exe</TargetImage>
         <SourceImage condition="is">C:\Windows\System32\wbem\WmiPrvSE.exe</SourceImage>
-	 <SourceImage condition="begin with">"C:\Program Files (x86)\DesktopCentral_Agent"</SourceImage>
-	 <SourceImage condition="begin with">"C:\Program Files\DesktopCentral_Server"</SourceImage>
+	 <SourceImage condition="begin with">C:\Program Files (x86)\DesktopCentral_Agent</SourceImage>
+	 <SourceImage condition="begin with">C:\Program Files\DesktopCentral_Server</SourceImage>
       </CreateRemoteThread>
     </RuleGroup>
     <!-- Event ID 9 == RawAccessRead - Includes -->
