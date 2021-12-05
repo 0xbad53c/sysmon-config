@@ -59,10 +59,10 @@ NG FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
           <Image condition="end with">/bin/busybox</Image>
           <Image condition="end with">/bin/tcsh</Image>
           <Image condition="end with">/bin/tclsh</Image>
-          <Image condition="end with">python</Image>
-          <Image condition="end with">ruby</Image>
+          <Image condition="contains">python</Image>
+          <Image condition="contains">ruby</Image>
           <Image condition="end with">lua</Image>
-          <Image condition="end with">php</Image>
+          <Image condition="contains">php</Image>
           <Image condition="end with">perl</Image>
         </Rule>
         <Rule name="TechniqueID=T1070.006,TechniqueName=Indicator Removal on Host: Timestomp" groupRelation="and">
@@ -227,10 +227,10 @@ NG FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
           <Image condition="end with">/bin/busybox</Image>
           <Image condition="end with">/bin/tcsh</Image>
           <Image condition="end with">/bin/tclsh</Image>
-          <Image condition="end with">python</Image>
-          <Image condition="end with">ruby</Image>
+          <Image condition="contains">python</Image>
+          <Image condition="contains">ruby</Image>
           <Image condition="end with">lua</Image>
-          <Image condition="end with">php</Image>
+          <Image condition="contains">php</Image>
           <Image condition="end with">perl</Image>
           <Image condition="end with">socat</Image>
           <Image condition="end with">xterm</Image>
