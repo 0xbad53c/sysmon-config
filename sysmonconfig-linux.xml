@@ -240,6 +240,13 @@ NG FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
           <Image condition="end with">netcat</Image>
           <Image condition="end with">ncat</Image>
         </Rule>
+          
+         <!-- Anything connecting out from uncommon directories -->
+        <Rule name="" groupRelation="or">
+          <Image condition="begin with">/home</Image>
+          <Image condition="begin with">/root</Image>
+          <Image condition="begin with">/tmp</Image>
+        </Rule>
       </NetworkConnect>
     </RuleGroup>
     
